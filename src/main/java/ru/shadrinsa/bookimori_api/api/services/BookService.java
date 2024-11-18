@@ -2,6 +2,7 @@ package ru.shadrinsa.bookimori_api.api.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.shadrinsa.bookimori_api.api.dto.AckDto;
 import ru.shadrinsa.bookimori_api.api.dto.book.BookDto;
 import ru.shadrinsa.bookimori_api.api.exeptions.NotFoundException;
 import ru.shadrinsa.bookimori_api.api.factories.BookDtoFactory;
@@ -34,5 +35,10 @@ public class BookService {
                 .orElseThrow(
                 () -> new NotFoundException("Book not found")
         );
+    }
+
+    public AckDto deleteBook(Long bookId) {
+        bookRepository.deleteById(bookId);
+        return AckDto.makeDefault(true);
     }
 }
