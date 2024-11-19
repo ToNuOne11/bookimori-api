@@ -16,4 +16,10 @@ public class GenreEntity {
     private Long id;
     private String name;
 
+    public static GenreEntity makeDefaultByName(String name) {
+        return builder()
+                .name(name)
+                .build();
+    }
+
 }

@@ -33,12 +33,23 @@ public class BookService {
     private BookEntity getBookOrThrowException(Long bookId) {
         return bookRepository.findById(bookId)
                 .orElseThrow(
-                () -> new NotFoundException("Book not found")
-        );
+                        () -> new NotFoundException("Book not found")
+                );
+    }
+
+    public BookDto addBook(BookDto book) {
+
+        BookEntity savedBook = bookRepository
+                .saveAndFlush(bookDtoFactory.makeBookEntity(book));
+
+        return bookDtoFactory.makeBookDto(savedBook);
+
     }
 
     public AckDto deleteBook(Long bookId) {
         bookRepository.deleteById(bookId);
         return AckDto.makeDefault(true);
     }
+
+
 }

@@ -24,7 +24,7 @@ public class BookEntity {
     @Column(name = "description", columnDefinition = "text")
     private String description;
     @ManyToOne
-    @JoinColumn(name = "genre_id")
+    @JoinColumn(name = "genre_id", nullable = false)
     private GenreEntity genre;
     @Column(name = "rating")
     private Short rating;
