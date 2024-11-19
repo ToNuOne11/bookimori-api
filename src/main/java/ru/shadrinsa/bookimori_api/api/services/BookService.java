@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.shadrinsa.bookimori_api.api.dto.AckDto;
 import ru.shadrinsa.bookimori_api.api.dto.book.BookDto;
+import ru.shadrinsa.bookimori_api.api.exeptions.BadRequestException;
 import ru.shadrinsa.bookimori_api.api.exeptions.NotFoundException;
 import ru.shadrinsa.bookimori_api.api.factories.BookDtoFactory;
 import ru.shadrinsa.bookimori_api.storage.enities.book.BookEntity;
 import ru.shadrinsa.bookimori_api.storage.repositories.book.BookRepository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -39,6 +40,8 @@ public class BookService {
 
     public BookDto addBook(BookDto book) {
 
+        checkValidParamsOrThrowException(book);
+
         BookEntity savedBook = bookRepository
                 .saveAndFlush(bookDtoFactory.makeBookEntity(book));
 
@@ -51,5 +54,11 @@ public class BookService {
         return AckDto.makeDefault(true);
     }
 
+    public void checkValidParamsOrThrowException(BookDto book) {
 
+        if (Objects.nonNull(book.getRating()) && (book.getRating() > 10 || book.getRating() < 1)) {
+            throw new BadRequestException("Rating must be from 1 to 10");
+        }
+
+    }
 }
