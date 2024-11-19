@@ -20,7 +20,7 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookDtoFactory bookDtoFactory;
 
-    public List<BookDto> getAll() {
+    public List<BookDto> getAllBook() {
         return bookRepository.streamAllBy()
                 .map(bookDtoFactory::makeBookDto)
                 .toList();

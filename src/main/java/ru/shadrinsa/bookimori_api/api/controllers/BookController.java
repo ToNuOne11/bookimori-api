@@ -18,7 +18,7 @@ public class BookController {
 
     @GetMapping("/api/book")
     public List<BookDto> getAllBooks(){
-        return bookService.getAll();
+        return bookService.getAllBook();
     }
 
     @GetMapping("/api/book/{book_id}")
