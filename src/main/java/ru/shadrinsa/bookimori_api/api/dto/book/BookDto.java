@@ -2,7 +2,6 @@ package ru.shadrinsa.bookimori_api.api.dto.book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import ru.shadrinsa.bookimori_api.storage.enities.book.ImageEntity;
 
 import java.time.Instant;
 
@@ -20,6 +19,6 @@ public class BookDto {
     private Short rating;
     @JsonProperty("created_at")
     private Instant createdAt = Instant.now();
-    private ImageEntity cover;
+    private String cover;
 
 }

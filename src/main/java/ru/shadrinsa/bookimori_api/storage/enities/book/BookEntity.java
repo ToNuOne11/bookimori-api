@@ -30,11 +30,5 @@ public class BookEntity {
     private Short rating;
     @Builder.Default
     private Instant createdAt = Instant.now();
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cover_id")
-    private ImageEntity cover;
-    public void addImageToBook(ImageEntity image) {
-        image.setBookEntity(this);
-        cover = image;
-    }
+    private String cover;
 }
